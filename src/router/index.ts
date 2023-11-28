@@ -23,11 +23,13 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
 router.beforeEach((to) => {
   if (to.path !== '/login') {
     const token = localCache.getCache('token')
     if (!token) {
-      router.push('/login')
+      // router.push('/login')
+      return '/login'
     }
   }
 })

@@ -17,11 +17,18 @@ import { createPinia } from 'pinia'
 //刷新也能够使pinia的state有值，就在这里运行一次，将缓存中的数据放到pinia中
 import { useLogin } from '@/store/login/index'
 
+//引入elemen-plus的icon相关
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+
 const app = createApp(App)
 app.use(store)
 app.use(router)
 app.use(ElementPlus)
 app.use(createPinia())
 useLogin().getCacheData()
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
 
 app.mount('#app')
