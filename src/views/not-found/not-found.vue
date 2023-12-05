@@ -1,14 +1,11 @@
 <template>
-  <div class="user">
-    <h2>user</h2>
-  </div>
+  <div>您搜索的页面不存在</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-
+import { defineComponent, reactive } from 'vue'
 export default defineComponent({
-  name: 'user-page',
+  name: 'not-found',
   setup() {
     return {}
   }

@@ -16,6 +16,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    'vue/no-template-key': 'off'
+    'vue/no-template-key': 'off',
+    '@typescript-eslint/no-var-requires': 0
   }
 }

@@ -8,7 +8,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'category',
+  name: 'category-page',
   setup() {
     return {}
   }

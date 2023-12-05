@@ -11,6 +11,7 @@ import router from '@/router/index'
 
 import localCache from '@/utils/cache'
 
+import { mapMenus } from '@/utils/map-menus'
 export const useLogin = defineStore('login', {
   //这里一定要将第一个属性写上，就是这个store的名字，不然的话this获取不到state
   state: () => ({
@@ -42,7 +43,14 @@ export const useLogin = defineStore('login', {
       console.log(userMenuRes)
       localCache.setCache('userMenu', userMenuRes.data)
       this.userMenu = userMenuRes.data
+
       router.push('/main')
+      const mapRoutes = mapMenus(this.userMenu) //userMenuRes.data
+      console.log('123123123123123')
+      console.log(mapRoutes)
+      mapRoutes.forEach((route) => {
+        router.addRoute('main', route)
+      })
     },
     getCacheData() {
       //这个是读取cacheWiley不进行刷新空白页bug，设置cache还是要在上面获取了数据就放发哦cache中。
@@ -61,6 +69,15 @@ export const useLogin = defineStore('login', {
       const userMenu = localCache.getCache('userMenu')
       if (userMenu) {
         this.userMenu = userMenu
+        //要放到缓存中才行，不然的话已刷新，pinia中的值就没有了，陆游的动态注入也就没有了
+        const routes = mapMenus(this.userMenu)
+        routes.forEach((route) => {
+          // console.log(route)
+          router.addRoute('main', route)
+
+          console.log('内存中的userMenu')
+        })
+        console.log(routes)
       }
     }
   }

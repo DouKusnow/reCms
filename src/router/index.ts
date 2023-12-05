@@ -1,4 +1,9 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  RouteRecordRaw,
+  createWebHashHistory
+} from 'vue-router'
 
 import localCache from '@/utils/cache'
 
@@ -16,12 +21,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/main',
     name: 'main',
     component: () => import('@/views/main/main.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/views/not-found/not-found.vue')
   }
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+  // history: createWebHistory(process.env.BASE_URL),
+  routes: routes,
+  history: createWebHashHistory()
 })
 
 router.beforeEach((to) => {

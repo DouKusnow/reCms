@@ -8,7 +8,7 @@
         <el-header class="header"
           ><nav-header @isChange="hasChange"></nav-header
         ></el-header>
-        <el-main>Main </el-main>
+        <el-main><router-view></router-view> </el-main>
       </el-container>
     </el-container>
   </div>

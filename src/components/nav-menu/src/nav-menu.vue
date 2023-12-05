@@ -29,8 +29,11 @@
 
               <span>{{ item.name }}</span>
             </template>
-            <div v-for="sonItem in item.children" :key="sonItem.id">
-              <el-menu-item :index="sonItem.id + ''">
+            <div v-for="sonItem in item.children" :key="sonItem?.id">
+              <el-menu-item
+                :index="sonItem?.id + ''"
+                @click="handleClick(sonItem)"
+              >
                 <component
                   v-if="item.icon"
                   :is="item.icon.split('el-icon-')[1]"
@@ -62,6 +65,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useLogin } from '@/store/login/index'
+
+import { useRouter } from 'vue-router'
 export default defineComponent({
   name: 'nav-menu',
   props: {
@@ -72,8 +77,21 @@ export default defineComponent({
   },
   setup() {
     const useLoginStore = useLogin()
+    const router = useRouter()
+    //这个要放到函数外部使用，不然值就会变成undefined
+
+    const handleClick = function (item: any) {
+      console.log(item.url)
+      //这里直接打印item是一个proxy，但是item.url就是普通的数据了
+
+      console.log(router)
+      router.push({
+        path: item.url
+      })
+    }
     return {
-      useLoginStore
+      useLoginStore,
+      handleClick
     }
   }
 })
@@ -87,14 +105,14 @@ export default defineComponent({
 
   .title-img {
     display: inline-block;
-    margin-left: 20px;
+    margin-left: -10px;
+    padding-left: 20px;
     height: 30px;
     width: 30px;
 
     img {
       height: 100%;
       width: 100%;
-      vertical-align: middle;
     }
   }
   .title-text {
@@ -102,6 +120,7 @@ export default defineComponent({
     margin-left: 10px;
     line-height: 80px;
     // text-align: end;
+    vertical-align: bottom;
   }
 }
 .el-menu-vertical-demo {
