@@ -1,9 +1,4 @@
-import { createStore } from 'vuex'
+import { useLogin } from './login/index'
+import { useSystem } from './main/system/index'
 
-export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {}
-})
+export { useLogin, useSystem }

@@ -64,7 +64,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useLogin } from '@/store/login/index'
+import { useLogin } from '@/store/index'
 
 import { useRouter } from 'vue-router'
 export default defineComponent({
